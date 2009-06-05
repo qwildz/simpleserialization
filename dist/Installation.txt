@@ -1,0 +1,18 @@
+SimpleSerialization installation instructions
+---------------------------------------------
+
+Copy the SimpleSerialization distribution folder to your Arduino IDE:
+SimpleSerialization
+-> arduino-00XX\hardware\libraries
+
+Copy the Arduino examples to your Arduino sketches folder:
+SimpleSerialization\examples\SimpleSerialization
+-> Arduino
+
+Copy the Processing library to your Processing library folder:
+SimpleSerialization\processing\libraries\SimpleSerialization
+-> Processing\libraries
+
+Copy the Processing examples to your Processing sketches folder:
+SimpleSerialization\processing\SimpleSerialization
+-> Processing
