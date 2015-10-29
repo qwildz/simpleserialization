@@ -11,8 +11,13 @@
 #ifndef _SIMPLESERIALIZATION_H
 #define	_SIMPLESERIALIZATION_H
 
-#include "HardwareSerial.h"
+#if ARDUINO > 22
+#include "Arduino.h"
+#else
 #include "WProgram.h"
+#endif
+
+#include "Stream.h"
 
 class SerializationData;
 
@@ -132,13 +137,13 @@ class SerializationSerialConnection {
     void addDeserializableData(SerializationData* data);
     void begin();
     void begin(long speed);
-    void begin(HardwareSerial* port, long speed);
+    void begin(Stream * port);
     void processInput();
     void write(SerializationData* data);
   private:
     static const long DEFAULT_SPEED = 115200;
     static const short MAXIMUM_READERS = 8;
-    HardwareSerial* port;
+    Stream * port;
     SerializationSerialReader* readers[MAXIMUM_READERS];
     int readerCounter;
     void process(byte b);

@@ -328,18 +328,17 @@ SerializationSerialConnection::SerializationSerialConnection() {
 }
 
 void SerializationSerialConnection::begin() {
+  Serial.begin(DEFAULT_SPEED);
   this->port = &Serial;
-  port->begin(DEFAULT_SPEED);
 }
 
 void SerializationSerialConnection::begin(long speed) {
+  Serial.begin(speed);
   this->port = &Serial;
-  port->begin(speed);
 }
 
-void SerializationSerialConnection::begin(HardwareSerial* port, long speed) {
+void SerializationSerialConnection::begin(Stream * port) {
   this->port = port;
-  port->begin(speed);
 }
 
 void SerializationSerialConnection::addDeserializableData(SerializationData* data) {
