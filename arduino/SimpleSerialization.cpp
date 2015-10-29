@@ -32,6 +32,15 @@ void SerializationTypes::integerToBytes(long val, byte b[SerializationTypes::SIZ
   b[3] = val & 0xff;
 }
 
+bool SerializationTypes::byteToBoolean(byte b[SerializationTypes::SIZEOF_BOOLEAN]) {
+  return ((bool) b[0]);
+}
+
+void SerializationTypes::booleanToByte(bool val, byte b[SerializationTypes::SIZEOF_BOOLEAN]) {
+  bool input = val;
+  b[0] = *((byte*)(&input));
+}
+
 long SerializationTypes::floatToIntBits(float val) {
   union u u;
   u.d = val;
@@ -69,6 +78,12 @@ long SerializationInputStream::readInteger() {
       b[i] = (byte)read();
   }
   return SerializationTypes::bytesToInteger(b);
+}
+
+bool SerializationInputStream::readBoolean() {
+  byte b[SerializationTypes::SIZEOF_BOOLEAN];
+  b[0] = (byte)read();
+  return SerializationTypes::byteToBoolean(b);
 }
 
 float SerializationInputStream::readFloat() {
@@ -118,6 +133,12 @@ void SerializationOutputStream::writeInteger(long val) {
   byte b[SerializationTypes::SIZEOF_INTEGER];
   SerializationTypes::integerToBytes(val, b);
   write(b, SerializationTypes::SIZEOF_INTEGER);
+}
+
+void SerializationOutputStream::writeBoolean(bool val) {
+  byte b[SerializationTypes::SIZEOF_BOOLEAN];
+  SerializationTypes::booleanToByte(val, b);
+  write(b, SerializationTypes::SIZEOF_BOOLEAN);
 }
 
 void SerializationOutputStream::writeFloat(float val) {

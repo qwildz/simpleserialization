@@ -9,7 +9,7 @@
  */
 
 #ifndef _SIMPLESERIALIZATION_H
-#define	_SIMPLESERIALIZATION_H
+#define _SIMPLESERIALIZATION_H
 
 #if ARDUINO > 22
 #include "Arduino.h"
@@ -29,8 +29,11 @@ class SerializationTypes {
     static const int SIZEOF_INTEGER = 4;
     static const int SIZEOF_FLOAT = 4;
     static const int SIZEOF_STRING = 4;
+    static const int SIZEOF_BOOLEAN = 1;
     static long bytesToInteger(byte b[SIZEOF_INTEGER]);
     static void integerToBytes(long val, byte b[SIZEOF_INTEGER]);
+    static bool byteToBoolean(byte b[SerializationTypes::SIZEOF_BOOLEAN]);
+    static void booleanToByte(bool val, byte b[SerializationTypes::SIZEOF_BOOLEAN]);
     static long floatToIntBits(float val);
     static float intBitsToFloat(long bits);
 };
@@ -151,5 +154,5 @@ class SerializationSerialConnection {
 
 extern SerializationSerialConnection SimpleSerialization;
 
-#endif	/* _SIMPLESERIALIZATION_H */
+#endif  /* _SIMPLESERIALIZATION_H */
 
