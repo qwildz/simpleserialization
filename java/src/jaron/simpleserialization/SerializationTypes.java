@@ -34,4 +34,16 @@ public class SerializationTypes {
     
     return b;
   }
+  
+  public static boolean byteToBoolean(byte[] b) {
+	return ((boolean) b[0]);
+  }
+  
+  public static byte[] booleanToByte(boolean val) {
+	byte[] b = new byte[1];
+	
+	b[0] = (byte ) (val);
+	
+	return b;
+  }
 }

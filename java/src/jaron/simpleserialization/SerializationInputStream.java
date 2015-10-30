@@ -40,5 +40,11 @@ public class SerializationInputStream extends ByteArrayInputStream {
     }
     return s.toString();
   }
+  
+  public boolean readBoolean() {
+	byte b[] = new byte[1];
+	b[0] = (byte )read();
+	return SerializationTypes.byteToBoolean(b);
+  }
 
 }

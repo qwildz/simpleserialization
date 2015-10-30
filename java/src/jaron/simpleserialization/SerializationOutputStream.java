@@ -28,4 +28,9 @@ public class SerializationOutputStream extends ByteArrayOutputStream {
     writeInteger(str.length());
     write(str.getBytes(), 0, str.length());
   }
+  
+  public void writeBoolean(boolean val) {
+	byte b[] = SerializationTypes.booleanToByte(val);
+    write(b, 0, b.length);
+  }
 }
