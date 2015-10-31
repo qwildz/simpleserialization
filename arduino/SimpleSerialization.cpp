@@ -368,7 +368,7 @@ void SerializationSerialConnection::addDeserializableData(SerializationData* dat
 }
 
 void SerializationSerialConnection::processInput() {
-  if (port->available() > 0) {
+  while (port->available() > 0) {
     byte b = port->read();
     process(b);
   }
@@ -378,9 +378,8 @@ void SerializationSerialConnection::write(SerializationData* data) {
   SerializationOutputStream out;
   data->write(out);
   byte* buffer = out.getBuffer();
-  for (int i = 0; i < out.getPos(); ++i) {
-    port->print(buffer[i]);
-  }
+  port->write(buffer,  out.getPos());
+  port->println();
 }
 
 void SerializationSerialConnection::process(byte b) {
